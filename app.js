@@ -1,9 +1,11 @@
+var data = {
+    title: 'Hello From The First Instance',
+    showParagraph: false
+};
+
 var vm1 = new Vue({
     el: '#app1',
-    data: {
-        title: 'Hello From The First Instance',
-        showParagraph: false
-    },
+    data: data,
     computed: {
         lowercaseTitle: function () {
             return this.title.toLowerCase();
@@ -27,7 +29,7 @@ var vm1 = new Vue({
 // Vue object vm1 will not be able to access this from the instance itself 
 // because it can only access initialized props when creation
 vm1.newProp = 'new!';
-console.log(vm1);
+console.log(vm1.$data === data);
 
 setTimeout(function () {
     vm1.title = 'changed from timer';
