@@ -12,8 +12,8 @@
 
 <body>
     <div id="app1">
-        <h2>{{ title }}</h2>
-        <button>Show Paragraph</button>
+        <h2 ref="heading">{{ title }}</h2>
+        <button v-on:click="show" ref="myButton">Show Paragraph</button>
     </div>
     <div id="app2">
         <h2>{{ title }}</h2>

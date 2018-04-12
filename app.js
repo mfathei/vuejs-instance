@@ -20,6 +20,7 @@ var vm1 = new Vue({
         show: function () {
             this.showParagraph = true;
             this.updateTitle('The VueJS Instance (Updated)');
+            console.log(this.$refs);
         },
         updateTitle: function (title) {
             this.title = title;
@@ -30,6 +31,7 @@ var vm1 = new Vue({
 // because it can only access initialized props when creation
 vm1.newProp = 'new!';
 console.log(vm1.$data === data);
+vm1.$refs.heading.innerText = 'test';
 
 setTimeout(function () {
     vm1.title = 'changed from timer';
