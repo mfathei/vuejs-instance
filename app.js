@@ -1,19 +1,31 @@
 var vm1 = new Vue({
     el: '#app1',
     data: {
-        title: 'Hello From The First Instance'
+        title: 'Hello From The First Instance',
+        showParagraph: false
+    },
+    computed: {
+        lowercaseTitle: function () {
+            return this.title.toLowerCase();
+        }
     },
     watch: {
         title: function (value) {
-            alert('Title changed! ' + value);
+            alert('Title changed! new value: ' + value);
         }
     },
     methods: {
-
+        show: function () {
+            this.showParagraph = true;
+            this.updateTitle('The VueJS Instance (Updated)');
+        },
+        updateTitle: function (title) {
+            this.title = title;
+        }
     }
 });
 
-setTimeout(function(){
+setTimeout(function () {
     vm1.title = 'changed from timer';
 }, 3000);
 
