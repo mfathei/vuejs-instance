@@ -3,6 +3,11 @@ var data = {
     showParagraph: false
 };
 
+// use this inside a div controlled by Vue instance like app2
+Vue.component('hello2', {
+    template: '<h1>Hello2 Component</h1>'
+});
+
 var vm1 = new Vue({
     data: data,
     computed: {
@@ -61,3 +66,9 @@ var vm3 = new Vue({
 // vm3.$mount('#app3');
 vm3.$mount();
 document.getElementById('app3').appendChild(vm3.$el);
+
+// will mount to the first component only use vue.component
+var vm4 = new Vue({
+    el: 'hello',
+    template: '<h1>Hello</h1>'
+});
