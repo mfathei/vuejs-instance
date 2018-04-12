@@ -1,74 +1,35 @@
-var data = {
-    title: 'Hello From The First Instance',
-    showParagraph: false
-};
-
-// use this inside a div controlled by Vue instance like app2
-Vue.component('hello2', {
-    template: '<h1>Hello2 Component</h1>'
-});
-
 var vm1 = new Vue({
-    data: data,
-    computed: {
-        lowercaseTitle: function () {
-            return this.title.toLowerCase();
-        }
-    },
-    watch: {
-        title: function (value) {
-            alert('Title changed! new value: ' + value);
-        }
-    },
-    methods: {
-        show: function () {
-            this.showParagraph = true;
-            this.updateTitle('The VueJS Instance (Updated)');
-            console.log(this.$refs);
-        },
-        updateTitle: function (title) {
-            this.title = title;
-        }
-    }
-});
-
-// instead of el inside Vue
-vm1.$mount('#app1');
-
-// Vue object vm1 will not be able to access this from the instance itself 
-// because it can only access initialized props when creation
-vm1.newProp = 'new!';
-console.log(vm1.$data === data);
-vm1.$refs.heading.innerText = 'test';
-
-setTimeout(function () {
-    vm1.title = 'changed from timer';
-    vm1.show();
-}, 3000);
-
-var vm2 = new Vue({
-    el: '#app2',
+    el: '#app1',
     data: {
-        title: 'Instance 2'
+        title: 'Default Title'
+    },
+    beforeCreate: function () {
+        console.log('beforeCreate()');
+    },
+    created: function () {
+        console.log('created()');
+    },
+    beforeMount: function () {
+        console.log('beforeMount()');
+    },
+    mounted: function () {
+        console.log('mounted()');
+    },
+    beforeUpdate: function () { // only fires if the new value not same as the old one
+        console.log('beforeUpdate()');
+    },
+    updated: function () { // only fires if the new value not same as the old one
+        console.log('updated()');
+    },
+    beforeDestroy: function () {
+        console.log('beforeDestroy()');
+    },
+    destroyed: function () {
+        console.log('destroyed()');
     },
     methods: {
-        onChange: function () {
-            vm1.title = 'changed';
+        destroy: function () {
+            this.$destroy();
         }
     }
-});
-
-// embedded template but not recommended
-var vm3 = new Vue({
-    template: '<h2>Heading</h2>'
-});
-
-// vm3.$mount('#app3');
-vm3.$mount();
-document.getElementById('app3').appendChild(vm3.$el);
-
-// will mount to the first component only use vue.component
-var vm4 = new Vue({
-    el: 'hello',
-    template: '<h1>Hello</h1>'
 });
