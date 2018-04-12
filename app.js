@@ -24,9 +24,14 @@ var vm1 = new Vue({
         }
     }
 });
+// Vue object vm1 will not be able to access this from the instance itself 
+// because it can only access initialized props when creation
+vm1.newProp = 'new!';
+console.log(vm1);
 
 setTimeout(function () {
     vm1.title = 'changed from timer';
+    vm1.show();
 }, 3000);
 
 var vm2 = new Vue({
