@@ -4,7 +4,6 @@ var data = {
 };
 
 var vm1 = new Vue({
-    el: '#app1',
     data: data,
     computed: {
         lowercaseTitle: function () {
@@ -27,6 +26,10 @@ var vm1 = new Vue({
         }
     }
 });
+
+// instead of el inside Vue
+vm1.$mount('#app1');
+
 // Vue object vm1 will not be able to access this from the instance itself 
 // because it can only access initialized props when creation
 vm1.newProp = 'new!';
@@ -49,3 +52,12 @@ var vm2 = new Vue({
         }
     }
 });
+
+// embedded template but not recommended
+var vm3 = new Vue({
+    template: '<h2>Heading</h2>'
+});
+
+// vm3.$mount('#app3');
+vm3.$mount();
+document.getElementById('app3').appendChild(vm3.$el);
